@@ -7,41 +7,28 @@ public class PasswordChecker {
     }
 
     public PasswordChecker(int minLength) {
-        setMinLength(minLength);
+        this.minLength = minLength;
     }
 
     public PasswordChecker(char[] specialSymbols) {
-        setSpecialSymbols(specialSymbols);
+        this.specialSymbols = specialSymbols;
     }
 
     public PasswordChecker(int minLength, char[] specialSymbols) {
-        setMinLength(minLength);
-        setSpecialSymbols(specialSymbols);
-    }
-
-    private void setMinLength(int minLength) {
-        if(minLength > 0){
-            this.minLength = minLength;
-        }
-    }
-
-    private void setSpecialSymbols(char[] specialSymbols) {
-        if( specialSymbols != null){
-            this.specialSymbols = specialSymbols;
-        }
+        this.minLength = minLength;
+        this.specialSymbols = specialSymbols;
     }
 
     public boolean checkPassword(String password, int minLength) {
-        setMinLength(minLength);
+        this.minLength = minLength;
         return checkPassword(password);
     }
 
-    public boolean checkPassword(String password){
+    public boolean checkPassword(String password) {
         if (password == null) {
             return false;
         }
-        boolean isPasswordValid = isLongEnough(password) && hasSpecialCharacter(password) && hasUppercaseLetter(password);
-        return isPasswordValid;
+        return isLongEnough(password) && hasSpecialCharacter(password) && hasUppercaseLetter(password);
     }
 
     private boolean isLongEnough(String password) {

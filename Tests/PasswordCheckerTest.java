@@ -35,4 +35,22 @@ public class PasswordCheckerTest {
     public void checkPassword_withoutSpecialSymbol_returnsFalse() {
         assertFalse(passwordChecker.checkPassword("Password", 2));
     }
+
+    @Test
+    public void checkPassword_withNeededRequirements_returnsTrue() {
+        assertFalse(passwordChecker.checkPassword("Password_306"));
+    }
+    @Test
+    public void checkPassword_withCustomSpecialCharacters_returnsTrue() {
+        char [] customSpecialSymbols ={'÷'};
+        PasswordChecker customPasswordChecker = new PasswordChecker(customSpecialSymbols);
+        assertTrue(customPasswordChecker.checkPassword("Password÷306"));
+    }
+
+    @Test
+    public void checkPassword_withCustomLength_returnsTrue() {
+        int customMinLength = 5;
+        PasswordChecker customPasswordChecker = new PasswordChecker(customMinLength);
+        assertTrue(customPasswordChecker.checkPassword("Pa_30"));
+    }
 }
