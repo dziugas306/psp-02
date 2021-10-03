@@ -17,7 +17,7 @@ public class PhoneValidator {
         if (countryRule == null) {
             return false;
         }
-        boolean hasCorrectLength = phoneNumber.length() > countryRule.length;
+        boolean hasCorrectLength = phoneNumber.length() == countryRule.length;
         return hasCorrectLength && onlyContainsNumbers(withoutPrefix(phoneNumber));
     }
 
@@ -34,7 +34,7 @@ public class PhoneValidator {
         if (isStringEmptyOrNull(countryCode) || isStringEmptyOrNull(prefix) || doesRuleExist(countryCode) || isPrefixInUse(prefix)){
             return false;
         }
-        CountryRule countryRule = new CountryRule(countryCode, length);
+        CountryRule countryRule = new CountryRule(prefix, length);
         countryRules.put(countryCode, countryRule);
         return true;
 
@@ -84,7 +84,7 @@ public class PhoneValidator {
 
     private boolean onlyContainsNumbers(String number) {
         try {
-            Integer.parseInt(number);
+            Long.parseLong(number);
         } catch (Exception e) {
             return false;
         }

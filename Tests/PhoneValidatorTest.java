@@ -2,8 +2,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PhoneValidatorTest {
@@ -50,6 +49,18 @@ public class PhoneValidatorTest {
     @Test
     public void addNewValidationRules_withExistingPrefix_returnsFalse() {
         assertFalse(phoneValidator.addNewValidationRules("RU",11, "+370"));
+    }
+
+    @Test
+    public void validatePhone_withNeededRequirements_returnsTrue() {
+        assertTrue(phoneValidator.validatePhone("+37065656874"));
+    }
+
+    @Test
+    public void validatePhone_withCustomCountryRule_ReturnsTrue(){
+        PhoneValidator customPhoneValidator = new PhoneValidator();
+        customPhoneValidator.addNewValidationRules("LA", 12, "+371");
+        assertTrue(customPhoneValidator.validatePhone("+37165656874"));
     }
 
 }
